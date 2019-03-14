@@ -1,0 +1,53 @@
+
+<nav class="navbar navbar-dark bg-dark">
+  <!-- Navbar content -->
+  <a class="navbar-brand" href="">Top YT</a>
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search By Name,views,subscribers,rank...">
+  </form>
+</nav>
+
+<div id="parent">
+      <ul class="channels">
+          <li *ngFor="let channel of channelList | filter:searchText | paginate: { itemsPerPage: 5, currentPage: p }" (click) ="getChannelInfo(channel);htmlInsideModal.open()">{{channel.Channelname}}</li>
+        </ul>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- channel info popup -->
+<modal #htmlInsideModal>
+    <ng-template #modalHeader><h2>{{name}}</h2></ng-template>
+    <ng-template #modalBody>
+        <form>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Rank</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="" value="{{rank}}" disabled>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Grade</label>
+                <input type="text" class="form-control" id="inputPassword4" placeholder="" value="{{grade}}" disabled>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">VideoViews</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="" value="{{videoViews}}" disabled>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputAddress">VideoUploads</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="" value="{{videoUploads}}" disabled>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="inputAddress2">Subscribers</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="" value="{{subscribers}}" disabled>
+              </div>
+            </div>
+            </form>
+    </ng-template>
+  </modal>
+
+
+
+
+<router-outlet></router-outlet>

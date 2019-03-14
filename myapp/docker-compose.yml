@@ -1,0 +1,13 @@
+version: '3'
+services:
+  server:
+    image: "dinesh63504kumar/server"
+    ports:
+     - "3000:3000"
+  mongodb:
+    image: "dinesh63504kumar/mongodb-data"
+    ports:
+     - "5050:27017"
+    volumes:
+        - ./:/app
+
